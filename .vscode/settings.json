@@ -1,0 +1,13 @@
+{
+  "files.associations": {
+    "**/*.html": "html",
+    "**/requirements{/**,*}.{txt,in}": "pip-requirements",
+    "*.erb": "erb",
+    "*.css": "css",
+    "*.html": "html",
+    "Gemfile": "ruby",
+    "stdlib.h": "c",
+    "math.h": "c",
+    "random": "c"
+  }
+}
