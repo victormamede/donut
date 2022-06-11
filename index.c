@@ -4,8 +4,8 @@
 
 #include "vector.h"
 
-#define THICKNESS_POINTS 30
-#define RADIUS_POINTS 100
+#define THICKNESS_POINTS 100
+#define RADIUS_POINTS 200
 
 #define CAMERA_CLIP_PLANE 60
 #define CAMERA_ZOOM 1
@@ -73,7 +73,7 @@ void drawTorus(Torus *torus, Screen *screen, Vector3 *light)
       add(circle_point, torus->position);
 
       double ooz = 1.0 / circle_point->z;
-      double x = circle_point->x * CAMERA_CLIP_PLANE * ooz;
+      double x = circle_point->x * CAMERA_CLIP_PLANE * ooz * 2;
       double y = circle_point->y * CAMERA_CLIP_PLANE * ooz;
 
       int x_pos = (int)x + screen->width / 2;
@@ -126,7 +126,7 @@ int main()
   torus.thickness = 4;
 
   Screen screen;
-  screen.width = 40;
+  screen.width = 80;
   screen.height = 40;
   screen.contents = malloc(screen.width * screen.height * sizeof(char));
   screen.z_buffer = malloc(screen.width * screen.height * sizeof(double));
@@ -134,14 +134,17 @@ int main()
   Vector3 *light = create_vector(0, -1, -1);
   normalize(light);
 
+  int step = 0;
   while (1)
   {
-    torus.rotation->z += 0.001;
-    torus.rotation->x += 0.0012;
+    torus.rotation->z += 0.01;
+    torus.rotation->x += 0.012;
 
     clearScreen(&screen);
     drawTorus(&torus, &screen, light);
     printScreen(&screen);
+
+    step++;
   }
 
   return 0;
